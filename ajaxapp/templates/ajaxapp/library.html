@@ -89,6 +89,19 @@
 
 {% block deletebook %}
 <div class="card">
+  {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      <strong>{{message}}</strong> 
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+</ul>
+{% endif %}
+
     {% if content %}
     <div class="card-header">
         <h3 class= "alert alert-info mx-auto"> ICodeLibrary.Com </h3>        
@@ -109,10 +122,10 @@
                 <td>{{ item.name }}</td>
             
                 <td>
-             <a href="{% url 'update-book' item.id %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'update-book' item.id %}" class="btn btn-warning">Edit</a>
                 <form action="{% url 'delete-book' item.id %}" method="POST" class="d-inline">    
                     {% csrf_token %}               
-                    <button typr="submit" class="btn btn-danger">Delete</button>
+                    <button typr="submit" class="btn btn-danger btn-sm d-inline">Delete</button>
                 </form>
                  
                </td>              
