@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %}Library Management System{% endblock title %}
+
+{% block blockactive %}active{% endblock blockactive %}
+
+{% block home %}  
+<div class="container">
+    <h5 class= "alert alert-info mx-auto" >Welcome To Our Library Management System</h5>
+        <div class="card">
+            {% if content %}
+            <div class="card-header">
+                <h5 class="card-title">Books</h5>
+            </div>
+            {% for book in content %}
+            <div class="card-body">
+              <p class="card-text mx-3 blockquote">
+                  <span> #: {{forloop.counter}}</span> 
+                  <span> Price: {{book.name}}</span> 
+                  <span> Pages: {{book.price}}</span>
+                  <span> Size: {{book.pages}}</span>             
+              </p>             
+            </div>
+            {% endfor %}
+
+            {% else %}
+                 <h3 class="alert alert-info"> No Data Available........... </h3>
+            {% endif %}        
+        </div> 
+        <nav aria-label="Page navigation example">
+            <ul class="pagination my-2">
+              {% if content.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{content.previous_page_number}}">Previous</a></li>
+              {% endif %}
+            
+              <li class="page-item"><a class="page-link" href="#">{{content.number}}</a></li>
+             
+             {% if content.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{content.next_page_number}}">Next</a></li>
+            {% endif %}
+            </ul>
+          </nav>
+    </div>
+{% endblock home %}
+
+{% block addbook %}
+<form action="" method="POST" class="col-lg-6 border border-info rounded  p-3 m-3 mx-auto">
+    <h5 class= "alert alert-info mx-auto text-center blockquote" >Add Book Form</h5>
+   {%csrf_token%}
+    {{form}}
+    <button type="submit" class="btn btn-info mt-3" id="add_book">Add Book</button>
+</form>
+{% endblock addbook %}
+
+
+{% block showbook %}
+<div class="card">
+    {% if content %}
+    <div class="card-header">
+        <h3 class= "alert alert-info mx-auto"> ICodeLibrary.Com </h3>        
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Pages</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for item in content %}
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.pages }}</td>
+              </tr>
+              {% endfor %}           
+            </tbody>
+          </table>
+    </div> 
+    {% else %}
+       <h3 class="alert alert-info"> No Data Available........... </h3>
+    {% endif %}
+</div>
+{% endblock showbook %}
+
+{% block deletebook %}
+<div class="card">
+    {% if content %}
+    <div class="card-header">
+        <h3 class= "alert alert-info mx-auto"> ICodeLibrary.Com </h3>        
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for item in content %}
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{ item.name }}</td>
+            
+                <td>
+             <a href="{% url 'update-book' item.id %}" class="btn btn-warning">Edit</a>
+                <form action="{% url 'delete-book' item.id %}" method="POST" class="d-inline">    
+                    {% csrf_token %}               
+                    <button typr="submit" class="btn btn-danger">Delete</button>
+                </form>
+                 
+               </td>              
+              </tr>
+              {% endfor %}           
+            </tbody>
+          </table>
+    </div> 
+    {% else %}
+       <h3 class="alert alert-info"> No Data Available........... </h3>
+    {% endif %}
+</div>
+{% endblock deletebook %}
+

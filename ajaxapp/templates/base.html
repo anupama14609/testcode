@@ -1,0 +1,47 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'ajaxapp/css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>{% block title %}{% endblock title %}</title>
+  </head>
+  <body>
+    
+    <div class="col-lg-8 border border-success rounded p-4 m-4 mx-auto">
+    <nav class="mb-2 mt-3">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+          <a class="nav-item nav-link" id="nav-addbook-tab" data-toggle="tab" href="#nav-addbook" role="tab" aria-controls="nav-addbook" aria-selected="false">Add Book</a>
+          <a class="nav-item nav-link" id="nav-showbook-tab" data-toggle="tab" href="#nav-showbook" role="tab" aria-controls="nav-showbook" aria-selected="false">Show Book</a>
+          <a class="nav-item nav-link" id="nav-deletebook-tab" data-toggle="tab" href="#nav-deletebook" role="tab" aria-controls="nav-deletebook" aria-selected="false">Delete Book</a>
+        </div>
+      </nav>
+      <div class="tab-content my-4 " id="nav-tabContent">
+
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+          {% block home %} {% endblock home %}
+      </div>
+        <div class="tab-pane fade show" id="nav-addbook" role="tabpanel" aria-labelledby="nav-addbook-tab">
+            {% block addbook %}{% endblock addbook %}
+        </div>
+        <div class="tab-pane fade" id="nav-showbook" role="tabpanel" aria-labelledby="nav-showbook-tab">
+            {% block showbook %} {% endblock showbook %}
+        </div>
+        <div class="tab-pane fade" id="nav-deletebook" role="tabpanel" aria-labelledby="nav-deletebook-tab">
+            {% block deletebook %}{% endblock deletebook %}
+        </div>
+      </div>
+
+   
+</div>
+  
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src=" {% static 'ajaxapp/js/library.js' %}"></script>  
+</body>
+</html>
